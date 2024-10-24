@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_starter_template/core/app_theme.dart';
 import 'package:flutter_starter_template/core/routes/routes.dart';
 import 'package:flutter_starter_template/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
@@ -46,8 +47,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       // Theme
-      theme: themeProvider.getLightTheme(), // Light theme
-      darkTheme: themeProvider.getDarkTheme(), // Dark theme
+      theme: AppTheme.getLightTheme, // Light theme
+      darkTheme: AppTheme.getDarkTheme, // Dark theme
       themeMode: themeProvider.getThemeMode(), // Current theme mode
       // Localization
       localizationsDelegates:

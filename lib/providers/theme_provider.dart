@@ -35,26 +35,4 @@ class ThemeProvider with ChangeNotifier {
     }
     notifyListeners(); // Ensure listeners update the theme after loading
   }
-
-  // Light theme definition
-  ThemeData getLightTheme() {
-    return ThemeData(
-      appBarTheme: const AppBarTheme(color: Colors.deepPurple),
-      colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      useMaterial3: true,
-      brightness: Brightness.light,
-      primarySwatch: Colors.deepPurple,
-    );
-  }
-
-  // Dark theme definition
-  ThemeData getDarkTheme() {
-    return ThemeData(
-      brightness: Brightness.dark,
-      primarySwatch: Colors.blueGrey,
-      appBarTheme: const AppBarTheme(
-        color: Colors.blueGrey,
-      ),
-    );
-  }
 }
