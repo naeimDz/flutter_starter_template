@@ -1,3 +1,15 @@
 {
-    
+    "home_title": "Home",
+    "welcome_title": "Welcome!",
+    "welcome_subtitle": "Flutter Starter Template is ready to use",
+    "counter_title": "Counter Demo",
+    "features_title": "Key Features",
+    "feature_theming": "Dynamic Theming",
+    "feature_theming_desc": "Light and dark mode with persistence",
+    "feature_localization": "Localization",
+    "feature_localization_desc": "Multi-language support (EN/AR)",
+    "feature_architecture": "MVC Architecture",
+    "feature_architecture_desc": "Clean and scalable code structure",
+    "feature_networking": "Networking",
+    "feature_networking_desc": "Dio-based API service with interceptors"
 }

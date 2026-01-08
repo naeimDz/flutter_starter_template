@@ -1,3 +1,15 @@
 {
-    
+    "home_title": "الرئيسية",
+    "welcome_title": "مرحباً!",
+    "welcome_subtitle": "قالب Flutter الأساسي جاهز للاستخدام",
+    "counter_title": "عرض العداد",
+    "features_title": "الميزات الرئيسية",
+    "feature_theming": "السمات الديناميكية",
+    "feature_theming_desc": "الوضع الفاتح والداكن مع الحفظ",
+    "feature_localization": "الترجمة",
+    "feature_localization_desc": "دعم متعدد اللغات (EN/AR)",
+    "feature_architecture": "بنية MVC",
+    "feature_architecture_desc": "كود نظيف وقابل للتوسع",
+    "feature_networking": "الشبكات",
+    "feature_networking_desc": "خدمة API باستخدام Dio مع Interceptors"
 }
