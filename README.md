@@ -10,6 +10,7 @@ A **premium Flutter boilerplate** with MVC architecture, designed to give you a 
 
 - **🎨 Dynamic Theming** - Light/Dark mode with persistence
 - **🌍 Localization** - Multi-language support (EN/AR) with easy_localization
+- **✨ Premium UI/UX** - High-fidelity Auth scenes with Hero animations
 - **🏗️ MVC Architecture** - Clean separation of concerns
 - **🌐 Networking** - Dio-based API service with interceptors
 - **💉 Dependency Injection** - get_it service locator
@@ -104,6 +105,27 @@ flutter pub get
 ```bash
 flutter run
 ```
+
+### Authentication System (Flexible & Plug-n-Play)
+
+The template features a **swappable authentication system** designed to keep getting started effortless while offering production readiness.
+
+- **Option A: Mock Mode (Default)**
+  - Works out-of-the-box.
+  - No configuration needed.
+  - Simulates API calls and returns dummy data.
+  - Perfect for UI development and prototyping.
+
+- **Option B: Firebase Mode**
+  - Production-ready `firebase_auth` implementation.
+  - Enabled via a simple flag.
+  
+**How to enable Firebase:**
+1. Add `google-services.json` (Android) / `GoogleService-Info.plist` (iOS).
+2. Set `enableFirebase = true` in `lib/core/config/app_config.dart`.
+3. That's it! The app now uses real Firebase Auth.
+
+---
 
 ### Environment Configuration
 
@@ -225,6 +247,38 @@ class HomeController extends BaseController {
 | `intl` | Date/number formatting |
 | `flutter_svg` | SVG support |
 | `cached_network_image` | Image caching |
+
+## 🗺️ Roadmap
+
+We are constantly improving the Pro MVC Boilerplate. Here's what's coming next:
+
+- [x] **Phase 1: Foundation**
+  - [x] Core Architecture (MVC)
+  - [x] Dynamic Theming & Localization
+  - [x] Networking & Storage Services
+
+- [x] **Phase 2: Authentication**
+  - [x] Flexible Repository Pattern (Mock/Firebase)
+  - [x] Premium Login & Register UI
+  - [x] Auth State Management
+
+- [ ] **Phase 3: Advanced Features (Upcoming)**
+  - [ ] 💳 Payment Gateway Integration (Stripe)
+  - [ ] 🔔 Push Notifications Service
+  - [ ] 📊 Analytics Dashboard
+  - [ ] 🤖 AI Chat Integration Example
+
+- [ ] **Phase 4: Dev Ops**
+  - [ ] 🚀 CI/CD Pipeline (GitHub Actions)
+  - [ ] 🧪 Integration Testing Setup
+  - [ ] 🐳 Docker Containerization
+
+## 📸 Screenshots
+
+| Light Mode | Dark Mode |
+|------------|-----------|
+| ![Login Light](/assets/screenshots/login_light.png) | ![Login Dark](/assets/screenshots/login_dark.png) |
+| ![Home Light](/assets/screenshots/home_light.png) | ![Home Dark](/assets/screenshots/home_dark.png) |
 
 ## 🤝 Contributing
 

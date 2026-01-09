@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_starter_template/core/config/app_config.dart';
 import 'package:flutter_starter_template/core/di/service_locator.dart';
 import 'package:flutter_starter_template/core/routes/routes.dart';
 import 'package:flutter_starter_template/core/theme/app_theme.dart';
@@ -13,6 +15,11 @@ void main() async {
 
   // Initialize Easy Localization
   await EasyLocalization.ensureInitialized();
+
+  // Initialize Firebase (if enabled)
+  if (AppConfig.enableFirebase) {
+    await Firebase.initializeApp();
+  }
 
   // Setup Dependency Injection
   await setupServiceLocator();

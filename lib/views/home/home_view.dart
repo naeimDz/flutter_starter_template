@@ -4,6 +4,7 @@ import 'package:flutter_starter_template/controllers/home_controller.dart';
 import 'package:flutter_starter_template/core/constants/app_sizes.dart';
 import 'package:flutter_starter_template/core/di/service_locator.dart';
 import 'package:flutter_starter_template/providers/theme_provider.dart';
+import 'package:flutter_starter_template/core/routes/routes.dart';
 import 'package:provider/provider.dart';
 
 /// Home screen view following MVC pattern.
@@ -85,6 +86,14 @@ class _HomeViewState extends State<HomeView> {
               child: Text('العربية'),
             ),
           ],
+        ),
+        // Settings
+        IconButton(
+          icon: const Icon(Icons.settings_outlined),
+          onPressed: () {
+            Navigator.of(context).pushNamed(AppRoutes.settings);
+          },
+          tooltip: 'Settings',
         ),
       ],
     );

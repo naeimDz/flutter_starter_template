@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_starter_template/core/constants/app_colors.dart';
 import 'package:flutter_starter_template/core/constants/app_sizes.dart';
 import 'package:flutter_starter_template/core/routes/routes.dart';
+import 'package:flutter_starter_template/core/di/service_locator.dart';
+import 'package:flutter_starter_template/data/repositories/auth/auth_repository.dart';
 
 /// Animated splash screen.
 ///
 /// Features:
 /// - Logo animation (fade + scale)
 /// - App initialization
-/// - Auto-navigation to home
+/// - Auto-navigation to home or login
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
 
@@ -53,22 +55,20 @@ class _SplashViewState extends State<SplashView>
   }
 
   Future<void> _initialize() async {
-    // Perform initialization tasks here:
-    // - Check auth status
-    // - Load cached data
-    // - Check for updates
-    // - etc.
-
     // Minimum splash duration for branding
     await Future.delayed(const Duration(seconds: 2));
 
-    if (mounted) {
-      _navigateToHome();
-    }
-  }
+    // Check Auth Status
+    final authRepo = sl<AuthRepository>();
+    final result = await authRepo.getCurrentUser();
 
-  void _navigateToHome() {
-    Navigator.of(context).pushReplacementNamed(AppRoutes.home);
+    if (mounted) {
+      if (result.isSuccess && result.data != null) {
+        Navigator.of(context).pushReplacementNamed(AppRoutes.home);
+      } else {
+        Navigator.of(context).pushReplacementNamed(AppRoutes.login);
+      }
+    }
   }
 
   @override
@@ -81,6 +81,8 @@ class _SplashViewState extends State<SplashView>
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
+    // Direct access to enum values is safe here
+    // ignore: deprecated_member_use
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -107,28 +109,32 @@ class _SplashViewState extends State<SplashView>
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // Logo
-                Transform.scale(
-                  scale: _scaleAnimation.value,
-                  child: Opacity(
-                    opacity: _fadeAnimation.value,
-                    child: Container(
-                      width: 120,
-                      height: 120,
-                      decoration: BoxDecoration(
-                        color: AppColors.white,
-                        borderRadius: BorderRadius.circular(AppSizes.radiusLg),
-                        boxShadow: [
-                          BoxShadow(
-                            color: AppColors.black.withOpacity(0.2),
-                            blurRadius: 20,
-                            offset: const Offset(0, 10),
-                          ),
-                        ],
-                      ),
-                      child: const Icon(
-                        Icons.flutter_dash,
-                        size: 64,
-                        color: AppColors.primary,
+                Hero(
+                  tag: 'app_logo',
+                  child: Transform.scale(
+                    scale: _scaleAnimation.value,
+                    child: Opacity(
+                      opacity: _fadeAnimation.value,
+                      child: Container(
+                        width: 120,
+                        height: 120,
+                        decoration: BoxDecoration(
+                          color: AppColors.white,
+                          borderRadius:
+                              BorderRadius.circular(AppSizes.radiusLg),
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppColors.black.withOpacity(0.2),
+                              blurRadius: 20,
+                              offset: const Offset(0, 10),
+                            ),
+                          ],
+                        ),
+                        child: const Icon(
+                          Icons.flutter_dash,
+                          size: 64,
+                          color: AppColors.primary,
+                        ),
                       ),
                     ),
                   ),

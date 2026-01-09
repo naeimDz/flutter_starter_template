@@ -49,4 +49,9 @@ class AppConfig {
 
   /// App version (should match pubspec.yaml)
   static const String appVersion = '1.0.0';
+
+  /// Whether to use Firebase services (Auth, Crashlytics, etc.)
+  /// Set this to true to enable Firebase.
+  /// Ensure you have added google-services.json (Android) and GoogleService-Info.plist (iOS).
+  static const bool enableFirebase = false; // Toggle this to enable Firebase
 }

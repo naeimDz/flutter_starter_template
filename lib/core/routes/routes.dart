@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_starter_template/views/home/home_view.dart';
 import 'package:flutter_starter_template/views/splash/splash_view.dart';
 import 'package:flutter_starter_template/views/error/error_view.dart';
+import 'package:flutter_starter_template/views/auth/login_view.dart';
+import 'package:flutter_starter_template/views/auth/register_view.dart';
+import 'package:flutter_starter_template/views/settings/settings_view.dart';
+import 'package:flutter_starter_template/views/settings/profile_edit_view.dart';
 
 /// Application routes configuration.
 ///
@@ -16,6 +20,11 @@ class AppRoutes {
   // Route Names
   static const String splash = '/';
   static const String home = '/home';
+  static const String login = '/login';
+  static const String register = '/register';
+  static const String forgotPassword = '/forgot-password'; // Placeholder
+  static const String settings = '/settings';
+  static const String profileEdit = '/profile/edit';
   static const String error = '/error';
 
   // For backward compatibility
@@ -34,6 +43,30 @@ class AppRoutes {
         return _buildRoute(
           settings,
           const HomeView(),
+        );
+
+      case login:
+        return _buildRoute(
+          settings,
+          const LoginView(),
+        );
+
+      case register:
+        return _buildRoute(
+          settings,
+          const RegisterView(),
+        );
+
+      case AppRoutes.settings:
+        return _buildRoute(
+          settings,
+          const SettingsView(),
+        );
+
+      case AppRoutes.profileEdit:
+        return _buildRoute(
+          settings,
+          const ProfileEditView(),
         );
 
       case error:
