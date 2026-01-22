@@ -86,11 +86,29 @@ class ApiService {
 
           // Handle 401 - Token refresh
           if (error.response?.statusCode == 401) {
+            AppLogger.w('Token expired, attempting refresh...', tag: 'API');
             // TODO: Implement token refresh logic
             // final refreshed = await _refreshToken();
             // if (refreshed) {
-            //   return handler.resolve(await _retry(error.requestOptions));
+            //   // Retry the original request
+            //   final options = error.requestOptions;
+            //   final response = await _dio.request(
+            //     options.path,
+            //     data: options.data,
+            //     queryParameters: options.queryParameters,
+            //     options: Options(
+            //       method: options.method,
+            //       headers: options.headers,
+            //     ),
+            //   );
+            //   return handler.resolve(response);
             // }
+          }
+
+          // Handle 503/504 - Potential retry or maintenance mode
+          if (error.response?.statusCode == 503 ||
+              error.response?.statusCode == 504) {
+            AppLogger.w('Server unavailable, consider retry...', tag: 'API');
           }
 
           return handler.next(error);

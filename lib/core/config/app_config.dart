@@ -54,4 +54,13 @@ class AppConfig {
   /// Set this to true to enable Firebase.
   /// Ensure you have added google-services.json (Android) and GoogleService-Info.plist (iOS).
   static const bool enableFirebase = false; // Toggle this to enable Firebase
+
+  /// Helper strings for specific environment names
+  static const String envDev = 'dev';
+  static const String envStaging = 'staging';
+  static const String envProd = 'prod';
+
+  /// Returns true if the app has a valid API URL
+  static bool get hasValidBaseUrl =>
+      baseUrl.isNotEmpty && baseUrl.startsWith('http');
 }

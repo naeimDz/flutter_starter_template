@@ -5,6 +5,7 @@ import 'package:flutter_starter_template/core/constants/app_sizes.dart';
 import 'package:flutter_starter_template/core/di/service_locator.dart';
 import 'package:flutter_starter_template/providers/theme_provider.dart';
 import 'package:flutter_starter_template/core/routes/routes.dart';
+import 'package:flutter_starter_template/shared/widgets/skeleton.dart';
 import 'package:provider/provider.dart';
 
 /// Home screen view following MVC pattern.
@@ -103,9 +104,7 @@ class _HomeViewState extends State<HomeView> {
     return Consumer<HomeController>(
       builder: (context, controller, child) {
         if (controller.isLoading) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return _buildSkeleton(context);
         }
 
         return SingleChildScrollView(
@@ -278,6 +277,40 @@ class _HomeViewState extends State<HomeView> {
         ),
         title: Text(feature.title),
         subtitle: Text(feature.description),
+      ),
+    );
+  }
+
+  Widget _buildSkeleton(BuildContext context) {
+    return SingleChildScrollView(
+      padding: AppSizes.paddingScreen,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          // Welcome Card Skeleton
+          const Skeleton(height: 120, borderRadius: AppSizes.radiusMd),
+          const SizedBox(height: AppSizes.spacing24),
+
+          // Counter Section Skeleton
+          const Skeleton(height: 180, borderRadius: AppSizes.radiusMd),
+          const SizedBox(height: AppSizes.spacing24),
+
+          // Features Section Skeleton
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Skeleton(width: 150, height: 24),
+              const SizedBox(height: AppSizes.spacing16),
+              ...List.generate(
+                3,
+                (index) => const Padding(
+                  padding: EdgeInsets.only(bottom: AppSizes.spacing12),
+                  child: Skeleton(height: 80, borderRadius: AppSizes.radiusMd),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

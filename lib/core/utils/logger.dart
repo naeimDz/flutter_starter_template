@@ -70,16 +70,28 @@ class AppLogger {
     final color = _getColor(level);
 
     final buffer = StringBuffer();
+    final divider = '---------------------------------------------------';
+
+    if (level == LogLevel.error) {
+      buffer.writeln(divider);
+    }
+
     buffer.write('$color[$timestamp][$logTag][$levelStr] ');
+    buffer.write(_getEmoji(level));
+    buffer.write(' ');
     buffer.write(message);
     buffer.write(_reset);
 
     if (error != null) {
-      buffer.write('\n${_red}Error: $error$_reset');
+      buffer.write('\n${_red}✖ Error: $error$_reset');
     }
 
     if (stackTrace != null) {
-      buffer.write('\n${_red}StackTrace: $stackTrace$_reset');
+      buffer.write('\n${_red}↳ StackTrace: $stackTrace$_reset');
+    }
+
+    if (level == LogLevel.error) {
+      buffer.writeln('\n$divider');
     }
 
     if (kDebugMode) {
@@ -134,6 +146,19 @@ class AppLogger {
         return 900;
       case LogLevel.error:
         return 1000;
+    }
+  }
+
+  static String _getEmoji(LogLevel level) {
+    switch (level) {
+      case LogLevel.debug:
+        return '🐛';
+      case LogLevel.info:
+        return '💡';
+      case LogLevel.warning:
+        return '⚠️';
+      case LogLevel.error:
+        return '🔥';
     }
   }
 }

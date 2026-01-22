@@ -62,7 +62,6 @@ class CustomButton extends StatelessWidget {
         );
       case ButtonType.secondary:
       case ButtonType.primary:
-      default:
         return ElevatedButton(
           onPressed: (isLoading || isDisabled) ? null : onPressed,
           style: style,
@@ -139,7 +138,6 @@ class CustomButton extends StatelessWidget {
           ),
         );
       case ButtonType.primary:
-      default:
         return ElevatedButton.styleFrom(
           backgroundColor: backgroundColor ?? theme.primaryColor,
           foregroundColor: foregroundColor ?? Colors.white,
