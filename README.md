@@ -10,20 +10,21 @@ A **premium Flutter boilerplate** with MVC architecture, designed to give you a 
 
 - **🎨 Dynamic Theming** - Light/Dark mode with persistence
 - **🌍 Localization** - Multi-language support (EN/AR) with easy_localization
-- **✨ Premium UI/UX** - High-fidelity Auth scenes with Hero animations
+- **✨ Premium UI/UX** - High-fidelity Auth scenes, Hero animations, and **Skeleton Loading**
 - **🏗️ MVC Architecture** - Clean separation of concerns
-- **🌐 Networking** - Dio-based API service with interceptors
+- **🌐 Networking** - Dio-based API service with robust interceptors & refresh token logic
 - **💉 Dependency Injection** - get_it service locator
 - **📦 State Management** - Provider pattern
 - **🔐 Secure Storage** - SharedPreferences wrapper
 - **✅ Form Validation** - Composable validators
-- **🎯 Extensions** - Useful Dart extensions for common operations
+- **🧪 Testing & CI/CD** - Pre-configured unit/widget tests and GitHub Actions
+- **📢 Observability** - Advanced color-coded logging with emojis
 
 ## 📁 Project Structure
 
 ```
 lib/
-├── main.dart                      # App entry point
+├── main.dart                      # App entry point (with Error Handling)
 │
 ├── core/                          # Core utilities & config
 │   ├── config/                    # Environment & API config
@@ -70,15 +71,25 @@ lib/
 │   ├── theme_provider.dart        # Theme state
 │   └── locale_provider.dart       # Language state
 │
-└── shared/                        # Shared Components
-    ├── widgets/                   # Reusable widgets
-    │   ├── custom_button.dart     # Custom button
-    │   ├── loading_overlay.dart   # Loading overlay
-    │   ├── app_text_field.dart    # Text input
-    │   └── empty_state.dart       # Empty state
-    └── helpers/                   # Helper utilities
-        ├── snackbar_helper.dart   # Snackbar utility
-        └── dialog_helper.dart     # Dialog utility
+├── shared/                        # Shared Components
+│   ├── widgets/                   # Reusable widgets
+│   │   ├── custom_button.dart     # Custom button
+│   │   ├── skeleton.dart          # Skeleton loader
+│   │   ├── loading_overlay.dart   # Loading overlay
+│   │   ├── app_text_field.dart    # Text input
+│   │   └── empty_state.dart       # Empty state
+│   └── helpers/                   # Helper utilities
+│       ├── snackbar_helper.dart   # Snackbar utility
+│       └── dialog_helper.dart     # Dialog utility
+│
+├── test/                          # Testing Layer
+│   ├── unit/                      # Unit tests (Validators, etc.)
+│   └── widget/                    # Widget tests (CustomButton, etc.)
+│
+├── .github/                       # DevOps
+│   └── workflows/                 # CI/CD pipelines
+│       └── ci.yml                 # GitHub Actions Config
+└── assets/                        # Static assets (Translations, Images)
 ```
 
 ## 🚀 Getting Started
@@ -156,9 +167,23 @@ final result = await apiService.get<UserModel>(
 );
 
 if (result.isSuccess) {
-  print(result.data);
+  AppLogger.i('User data: ${result.data}', tag: 'User');
 } else {
-  print(result.error);
+  AppLogger.e('Failed to load user', error: result.error);
+}
+```
+
+### Skeleton Loading
+```dart
+// Custom skeleton layout
+Widget _buildLoading() {
+  return const Column(
+    children: [
+      Skeleton(height: 100, borderRadius: 12),
+      SizedBox(height: 16),
+      Skeleton(width: 200, height: 20),
+    ],
+  );
 }
 ```
 
@@ -247,6 +272,8 @@ class HomeController extends BaseController {
 | `intl` | Date/number formatting |
 | `flutter_svg` | SVG support |
 | `cached_network_image` | Image caching |
+| `shimmer` | Skeleton loading effects |
+| `flutter_native_splash` | Native splash screen handling |
 
 ## 🗺️ Roadmap
 
@@ -262,14 +289,14 @@ We are constantly improving the Pro MVC Boilerplate. Here's what's coming next:
   - [x] Premium Login & Register UI
   - [x] Auth State Management
 
-- [ ] **Phase 3: Advanced Features (Upcoming)**
+- [x] **Phase 3: Advanced Features**
+  - [x] 🧪 Foundation Testing (Unit & Widget)
+  - [x] 🏗️ Skeleton Loading UI
   - [ ] 💳 Payment Gateway Integration (Stripe)
   - [ ] 🔔 Push Notifications Service
-  - [ ] 📊 Analytics Dashboard
-  - [ ] 🤖 AI Chat Integration Example
 
-- [ ] **Phase 4: Dev Ops**
-  - [ ] 🚀 CI/CD Pipeline (GitHub Actions)
+- [x] **Phase 4: Dev Ops**
+  - [x] 🚀 CI/CD Pipeline (GitHub Actions)
   - [ ] 🧪 Integration Testing Setup
   - [ ] 🐳 Docker Containerization
 
